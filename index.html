@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sufyan Azami | AI & Web Developer Portfolio</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==================== ROOT VARIABLES ==================== */
+        :root[data-theme="dark"] {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-glow: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            --card-bg: rgba(30, 41, 59, 0.6);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        :root[data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --accent-glow: linear-gradient(135deg, #4f46e5, #7c3aed, #db2777);
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ==================== GLASSMORPHISM UI ==================== */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        /* ==================== NAVBAR ==================== */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--accent-glow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #a855f7;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.2rem;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 120px 10% 60px;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h3 {
+            font-size: 1.2rem;
+            color: #a855f7;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            max-width: 550px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--accent-glow);
+            color: #fff;
+            border: none;
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--glass-border);
+            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3);
+        }
+
+        /* Profile Container */
+        .hero-img-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .profile-card {
+            width: 300px;
+            height: 380px;
+            padding: 12px;
+            text-align: center;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .profile-card:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        /* ==================== CUSTOM FULL-BODY ROBOT ==================== */
+        .robot-floating-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 35px;
+            z-index: 9999;
+            cursor: pointer;
+            animation: floatUpDown 3.5s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(168, 85, 247, 0.4));
+            transition: transform 0.3s;
+        }
+
+        .robot-floating-wrapper:hover {
+            transform: scale(1.08);
+        }
+
+        .robot-character {
+            width: 130px;
+            height: 190px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Antenna */
+        .robot-antenna {
+            width: 6px;
+            height: 22px;
+            background: #94a3b8;
+            position: relative;
+        }
+        .robot-antenna-ball {
+            width: 14px;
+            height: 14px;
+            background: #00f2fe;
+            border-radius: 50%;
+            position: absolute;
+            top: -12px;
+            left: -4px;
+            box-shadow: 0 0 12px #00f2fe, 0 0 20px #00f2fe;
+            animation: pulseGlow 1.5s infinite alternate;
+        }
+
+        /* Head */
+        .robot-head {
+            width: 85px;
+            height: 60px;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 2px solid #a855f7;
+            border-radius: 18px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 10px rgba(168, 85, 247, 0.3);
+        }
+
+        /* Ears */
+        .robot-ear {
+            width: 8px;
+            height: 16px;
+            background: #a855f7;
+            border-radius: 4px;
+            position: absolute;
+            top: 20px;
+        }
+        .robot-ear.left { left: -9px; }
+        .robot-ear.right { right: -9px; }
+
+        /* Face & Screen */
+        .robot-face {
+            width: 70px;
+            height: 44px;
+            background: #020617;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            border: 1px solid rgba(0, 242, 254, 0.3);
+        }
+
+        /* Eyes with Blinking Animation */
+        .robot-eyes {
+            display: flex;
+            gap: 16px;
+        }
+        .robot-eye {
+            width: 14px;
+            height: 14px;
+            background: #00f2fe;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #00f2fe;
+            animation: blinkEye 3.5s infinite;
+        }
+
+        /* Nose & Mouth */
+        .robot-nose {
+            width: 4px;
+            height: 4px;
+            background: #a855f7;
+            border-radius: 50%;
+        }
+        .robot-mouth {
+            width: 24px;
+            height: 4px;
+            background: #00f2fe;
+            border-radius: 2px;
+            box-shadow: 0 0 5px #00f2fe;
+        }
+
+        /* Neck */
+        .robot-neck {
+            width: 24px;
+            height: 8px;
+            background: #475569;
+            border-radius: 2px;
+        }
+
+        /* Body (Chest) */
+        .robot-body {
+            width: 90px;
+            height: 65px;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 2px solid #6366f1;
+            border-radius: 16px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Chest Core */
+        .robot-chest-core {
+            width: 26px;
+            height: 26px;
+            background: radial-gradient(circle, #ec4899 0%, #a855f7 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 12px #ec4899;
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        /* Arms */
+        .robot-arm {
+            width: 12px;
+            height: 45px;
+            background: linear-gradient(to bottom, #475569, #1e293b);
+            border: 1px solid #a855f7;
+            border-radius: 6px;
+            position: absolute;
+            top: 5px;
+        }
+        .robot-arm.left {
+            left: -16px;
+            transform: rotate(12deg);
+        }
+        .robot-arm.right {
+            right: -16px;
+            transform: rotate(-12deg);
+        }
+        .robot-hand {
+            width: 10px;
+            height: 10px;
+            border: 2px solid #00f2fe;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -6px;
+            left: 0px;
+        }
+
+        /* Legs & Feet */
+        .robot-legs {
+            display: flex;
+            gap: 18px;
+            position: relative;
+        }
+        .robot-leg {
+            width: 14px;
+            height: 28px;
+            background: #334155;
+            border: 1px solid #6366f1;
+            border-radius: 4px;
+            position: relative;
+        }
+        .robot-foot {
+            width: 22px;
+            height: 8px;
+            background: #a855f7;
+            border-radius: 4px;
+            position: absolute;
+            bottom: -6px;
+            left: -4px;
+            box-shadow: 0 0 6px #a855f7;
+        }
+
+        /* ==================== AI ROBOT CHAT MODAL ==================== */
+        .robot-chat-box {
+            display: none;
+            position: fixed;
+            bottom: 230px;
+            right: 35px;
+            width: 320px;
+            height: 400px;
+            z-index: 10000;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #00f2fe;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.3);
+        }
+
+        .chat-header {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .chat-header h4 {
+            color: #00f2fe;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-chat {
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        .chat-msg {
+            padding: 8px 12px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .chat-msg.bot {
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            align-self: flex-start;
+            color: var(--text-color);
+        }
+
+        .chat-msg.user {
+            background: rgba(168, 85, 247, 0.3);
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            align-self: flex-end;
+            color: #fff;
+        }
+
+        .chat-footer {
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            outline: none;
+            font-size: 0.85rem;
+        }
+
+        .chat-footer button {
+            background: #a855f7;
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Keyframes Animation */
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-16px); }
+        }
+
+        @keyframes blinkEye {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.6; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* ==================== SECTIONS COMMON ==================== */
+        section { padding: 80px 10%; }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            background: var(--accent-glow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ABOUT ME */
+        .about-content {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 35px;
+        }
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+        }
+        .stat-box h4 { font-size: 1.5rem; color: #a855f7; }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        .skill-card { padding: 25px; text-align: center; transition: transform 0.3s; }
+        .skill-card:hover { transform: translateY(-8px); }
+        .skill-card i { font-size: 2.5rem; margin-bottom: 15px; color: #a855f7; }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .project-card { padding: 25px; transition: transform 0.3s ease; position: relative; }
+        .project-card:hover { transform: translateY(-10px) scale(1.02); }
+        .project-card h3 { margin-bottom: 10px; color: #6366f1; }
+        .project-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
+
+        /* TIMELINE */
+        .timeline {
+            max-width: 700px;
+            margin: 0 auto;
+            border-left: 2px solid #a855f7;
+            padding-left: 20px;
+        }
+        .timeline-item { margin-bottom: 30px; position: relative; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #a855f7;
+        }
+
+        /* CONTACT */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .contact-info p { margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
+        .contact-form form { display: flex; flex-direction: column; gap: 15px; }
+        .contact-form input, .contact-form textarea {
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            outline: none;
+        }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons a {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            transition: 0.3s;
+        }
+        .social-icons a:hover { background: #a855f7; color: #fff; transform: translateY(-3px); }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 30px; border-top: 1px solid var(--glass-border); color: var(--text-muted); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 140px; }
+            .btn-group { justify-content: center; }
+            .nav-links { display: none; }
+            .robot-character { transform: scale(0.85); }
+            .robot-chat-box { width: 280px; right: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="glass">
+        <div class="logo">Sufyan.</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero">
+        <div class="hero-text">
+            <h3>Hello, I'm</h3>
+            <h1>Sufyan Azami</h1>
+            <p>IT Student & Web Developer specializing in interactive web applications, 3D browser experiences, and modern AI projects.</p>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            </div>
+        </div>
+        <div class="hero-img-container">
+            <div class="profile-card glass">
+                <img src="WhatsApp Image 2026-07-23 at 8.59.59 PM (1).jpeg" id="profileImg" alt="Sufyan Azami">
+            </div>
+        </div>
+    </section>
+
+    <!-- ROBOT CHAT MODAL (Poochne Par Jawaab Dega) -->
+    <div class="robot-chat-box glass" id="robotChatBox">
+        <div class="chat-header">
+            <h4><i class="fa-solid fa-robot"></i> Sufyan's AI Assistant</h4>
+            <i class="fa-solid fa-xmark close-chat" id="closeChat"></i>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-msg bot">Hi! Ask me anything about Sufyan's projects, skills, or education!</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Ask about projects..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- FULLY ANIMATED ROBOT WITH SCROLL FOLLOW & CLICK INTERACTION -->
+    <div class="robot-floating-wrapper" id="robotWrapper">
+        <div class="robot-character">
+            <!-- Antenna -->
+            <div class="robot-antenna">
+                <div class="robot-antenna-ball"></div>
+            </div>
+            
+            <!-- Head with Ears, Face, Eyes, Nose, Mouth -->
+            <div class="robot-head">
+                <div class="robot-ear left"></div>
+                <div class="robot-ear right"></div>
+                <div class="robot-face">
+                    <div class="robot-eyes">
+                        <div class="robot-eye"></div>
+                        <div class="robot-eye"></div>
+                    </div>
+                    <div class="robot-nose"></div>
+                    <div class="robot-mouth"></div>
+                </div>
+            </div>
+
+            <!-- Neck -->
+            <div class="robot-neck"></div>
+
+            <!-- Body with Arms and Core -->
+            <div class="robot-body">
+                <div class="robot-arm left">
+                    <div class="robot-hand"></div>
+                </div>
+                <div class="robot-chest-core"></div>
+                <div class="robot-arm right">
+                    <div class="robot-hand"></div>
+                </div>
+            </div>
+
+            <!-- Legs & Feet -->
+            <div class="robot-legs">
+                <div class="robot-leg"><div class="robot-foot"></div></div>
+                <div class="robot-leg"><div class="robot-foot"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT ME SECTION -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content glass">
+            <div>
+                <h3>Passionate Developer & Student</h3>
+                <p style="color: var(--text-muted); margin-top: 10px;">
+                    Based in Federal B Area, Karachi, I am a dedicated student pursuing my secondary education while building advanced skills in modern web development and Artificial Intelligence.
+                </p>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <h4>Class 10</h4>
+                        <p>Current Grade</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>5+</h4>
+                        <p>Projects Done</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>100%</h4>
+                        <p>Dedication</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+        <h2 class="section-title">My Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card glass">
+                <i class="fa-brands fa-html5"></i>
+                <h3>Frontend Engineering</h3>
+                <p>HTML5, CSS3, Modern JavaScript (ES6+), Glassmorphic Design</p>
+            </div>
+            <div class="skill-card glass">
+                <i class="fa-solid fa-robot"></i>
+                <h3>Robotics & AI Concepts</h3>
+                <p>Artificial Intelligence, Custom UI Bots, Interactive CSS Animations</p>
+            </div>
+            <div class="skill-card glass">
+                <i class="fa-solid fa-gamepad"></i>
+                <h3>Game Development</h3>
+                <p>HTML5 Canvas Games, Collision Physics, Game Loops</p>
+            </div>
+            <div class="skill-card glass">
+                <i class="fa-solid fa-cube"></i>
+                <h3>3D & UI Interaction</h3>
+                <p>Mouse Parallax, Card Tilts, Responsive Layouts</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card glass">
+                <h3><i class="fa-solid fa-robot" style="color: #00f2fe; margin-right: 8px;"></i> Full-Body AI Companion Robot</h3>
+                <p>An interactive, animated CSS/JS robot with blinking eyes, glowing chest core, and smooth scroll tracking to guide users across the page.</p>
+                <a href="#" class="btn btn-secondary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+            </div>
+            <div class="project-card glass">
+                <h3>Zombie Hunter Game</h3>
+                <p>An action-oriented browser game featuring HTML5 Canvas, keyboard controls, and collision detection logic.</p>
+                <a href="#" class="btn btn-secondary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+            </div>
+            <div class="project-card glass">
+                <h3>Interactive Glass Calculator</h3>
+                <p>A sleek, responsive calculator app with theme toggling, clean glass UI, and keyboard input support.</p>
+                <a href="#" class="btn btn-secondary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+            </div>
+            <div class="project-card glass">
+                <h3>3D Interactive Portfolio</h3>
+                <p>Apple/Framer style modern portfolio with glassmorphism UI, theme switcher, and smooth animations.</p>
+                <a href="#" class="btn btn-secondary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="education">
+        <h2 class="section-title">Education & Qualifications</h2>
+        <div class="timeline">
+            <div class="timeline-item glass" style="padding: 20px;">
+                <h3>Class 10 (Matriculation - Final Year)</h3>
+                <p style="color: #a855f7; font-weight: 600;">2026 | Computer Science Stream</p>
+                <p style="color: var(--text-muted);">Currently completing Grade 10 secondary education with a major focus on Science, Mathematics, and Computer Fundamentals.</p>
+            </div>
+            <div class="timeline-item glass" style="padding: 20px;">
+                <h3>Class 9 (Secondary Education)</h3>
+                <p style="color: #a855f7; font-weight: 600;">2025 | Computer Science Stream</p>
+                <p style="color: var(--text-muted);">Successfully completed Grade 9 syllabus covering fundamental physics, chemistry, basic programming logic, and computer theory.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info glass" style="padding: 30px;">
+                <h3>Contact Information</h3>
+                <br>
+                <p><i class="fa-solid fa-user" style="color: #a855f7;"></i> <strong>Name:</strong> Sufyan Azami</p>
+                <p><i class="fa-solid fa-envelope" style="color: #a855f7;"></i> <strong>Email:</strong> azamisufyan83@gmail.com</p>
+                <p><i class="fa-solid fa-location-dot" style="color: #a855f7;"></i> <strong>Location:</strong> Federal B Area, Karachi, Pakistan</p>
+
+                <div class="social-icons">
+                    <a href="mailto:azamisufyan83@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="contact-form glass" style="padding: 30px;">
+                <form onsubmit="event.preventDefault(); alert('Thank you Sufyan! Your message has been sent.');">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="4" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Sufyan Azami | All Rights Reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Theme Toggle
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const rootTag = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = rootTag.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            rootTag.setAttribute('data-theme', newTheme);
+            
+            themeToggleBtn.innerHTML = newTheme === 'dark' 
+                ? '<i class="fa-solid fa-moon"></i>' 
+                : '<i class="fa-solid fa-sun"></i>';
+        });
+
+        // 3D Parallax Effects
+        document.querySelectorAll('.project-card, .skill-card, .profile-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateX(${-y / 15}deg) rotateY(${x / 15}deg) translateY(-5px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            });
+        });
+
+        // Robot Interaction Logic
+        const robotWrapper = document.getElementById('robotWrapper');
+        const robotChatBox = document.getElementById('robotChatBox');
+        const closeChat = document.getElementById('closeChat');
+        const chatBody = document.getElementById('chatBody');
+        const chatInput = document.getElementById('chatInput');
+
+        robotWrapper.addEventListener('click', () => {
+            robotChatBox.style.display = robotChatBox.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        closeChat.addEventListener('click', () => {
+            robotChatBox.style.display = 'none';
+        });
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function appendMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('chat-msg', sender);
+            msgDiv.innerText = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function sendMessage() {
+            const query = chatInput.value.trim().toLowerCase();
+            if (!query) return;
+
+            // Display User Message
+            appendMessage(chatInput.value, 'user');
+            chatInput.value = '';
+
+            // AI Bot Answers
+            setTimeout(() => {
+                let response = "I'm Sufyan's AI Bot! You can ask me about his projects, skills, location, or education.";
+                
+                if (query.includes('project') || query.includes('work') || query.includes('game')) {
+                    response = "Sufyan has built: 1) AI Companion Bot 2) Zombie Hunter Canvas Game 3) Glassmorphism Calculator 4) 3D Interactive Portfolio.";
+                } else if (query.includes('skill') || query.includes('code') || query.includes('language')) {
+                    response = "Sufyan is skilled in HTML5, CSS3, Modern JavaScript (ES6+), Glassmorphism UI, Canvas Game Dev, and AI Concepts!";
+                } else if (query.includes('education') || query.includes('class') || query.includes('study')) {
+                    response = "Sufyan completed Class 9 in 2025 and is currently studying in Class 10 (2026) under Computer Science stream.";
+                } else if (query.includes('location') || query.includes('where') || query.includes('city') || query.includes('from')) {
+                    response = "Sufyan is based in Federal B Area, Karachi, Pakistan.";
+                } else if (query.includes('contact') || query.includes('email') || query.includes('hi') || query.includes('hello')) {
+                    response = "You can contact Sufyan via email at azamisufyan83@gmail.com!";
+                }
+
+                appendMessage(response, 'bot');
+            }, 600);
+        }
+    </script>
+</body>
+</html>
